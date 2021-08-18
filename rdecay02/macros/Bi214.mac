@@ -1,0 +1,42 @@
+# 									
+# Decays of Bi214 in vr mode
+#
+#                                                                         
+/control/verbose 2
+/run/verbose 1
+#
+
+#
+/run/initialize
+/control/execute vis.mac
+#
+/process/list
+#
+# rdm is applied only to the target volume
+/process/had/rdm/allVolumes
+#
+# place the isotopes at the edge of the detector, at rest.
+/gun/particle ion
+/gun/ion 83 214 0 0 # Bi214
+/gun/position 0. 0. 11.9999 m
+#
+#  VR MC
+/process/had/rdm/analogueMC 0
+/analysis/setFileName bi214
+/analysis/h1/set 0 100 0. 25. MeV
+/analysis/h1/set 1 100 0. 25. MeV
+/analysis/h1/set 6 100 0. 25. MeV
+/analysis/ntuple/setActivation 0 true
+/analysis/ntuple/setActivation 1 true
+/analysis/ntuple/setActivation 2 true
+/analysis/ntuple/setActivation 3 true
+/analysis/ntuple/setActivation 4 true
+/run/printprogress 1000
+#
+##/run/beamOn 30
+
+
+
+
+
+

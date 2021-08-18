@@ -1,0 +1,71 @@
+# 									
+# Decays of Bi214 in vr mode
+#
+#                                                                         
+/control/verbose 2
+/run/verbose 1
+#
+# Materials available: 
+# Hydrogen, Nitrogen, Oxygen, Carbon, Sulfur, 
+# Phosphorous, Chromium, Iron, Manganese, 
+# Silicon, Nickel, Water, Air, Stainless Steel 
+# Geometries and materials
+##/rdecay02/det/setTargetLength
+##/rdecay02/det/setTargetRadius
+##/rdecay02/det/setTargetMater
+##/rdecay02/det/setDetectorLength
+/rdecay02/det/setDetectorThickness 0.5 mm
+##/rdecay02/det/setDetectorMater
+##/rdecay02/det/setGapLength
+##/rdecay02/det/setGapThickness
+##/rdecay02/det/setGapMater
+##/rdecay02/det/setShieldLength
+##/rdecay02/det/setShieldThickness
+##/rdecay02/det/setShieldMater
+
+#
+/run/initialize
+/control/execute vis.mac
+/vis/viewer/colourByDensity 1 mg/cm3 1 8000 20000
+/vis/viewer/set/style w
+/vis/viewer/set/auxiliaryEdge
+#
+/process/list
+#
+# rdm is applied only to the target volume
+/process/had/rdm/noVolumes
+/process/had/rdm/selectVolume Target
+#
+# place the isotopes at the edge of the detector, at rest.
+/gun/particle gamma
+/gun/energy 2.448 MeV
+/gun/position 12. 0. 0. m
+/gun/direction -1. 0. 0. m
+#
+#  VR MC
+/process/had/rdm/analogueMC 0
+/analysis/setFileName bi214GAMMA-Detector
+/analysis/h1/set 0 100 0. 5. MeV
+/analysis/h1/set 1 100 0. 5. MeV
+/analysis/h1/set 6 100 0. 5. MeV
+/analysis/ntuple/setActivation 0 true
+/analysis/ntuple/setActivation 1 true
+/analysis/ntuple/setActivation 2 true
+/analysis/ntuple/setActivation 3 true
+/analysis/ntuple/setActivation 4 true
+#
+/run/beamOn 30
+
+/gun/position 12.005 0. 0. m
+/analysis/setFileName bi214GAMMA-Gap
+/run/beamOn 30
+
+/gun/position 14.555 0. 0. m
+/analysis/setFileName bi214GAMMA-Shield
+/run/beamOn 30
+
+/gun/position 20. 0. 0. m
+/analysis/setFileName bi214GAMMA-Ext
+/run/beamOn 30
+
+
