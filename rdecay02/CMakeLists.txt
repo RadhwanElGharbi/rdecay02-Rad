@@ -50,6 +50,9 @@ set(rdecay02_SCRIPTS
     /macros/Bi214.mac
     /macros/Bi214GAMMA.mac
     /macros/Bi214GAMMA2test.mac
+    /macros/gammaDet.mac
+    /macros/gammaGap.mac
+    /macros/gammaShield.mac
   )
 
 foreach(_script ${rdecay02_SCRIPTS})

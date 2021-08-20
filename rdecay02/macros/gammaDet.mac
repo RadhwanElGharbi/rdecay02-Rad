@@ -43,7 +43,7 @@
 
 /process/had/rdm/analogueMC 0
 
-/analysis/setFileName bi214GAMMA-Detector
+/analysis/setFileName bi214GAMMAVol-Detector
 /analysis/h1/set 0 100 0. 5. MeV
 /analysis/h1/set 1 100 0. 5. MeV
 /analysis/h1/set 6 100 0. 5. MeV
@@ -55,7 +55,7 @@
 
 /run/printProgress 10000
 
-/run/beamOn 1000
+/run/beamOn 10000
 
 
 
