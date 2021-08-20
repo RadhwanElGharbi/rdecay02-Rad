@@ -172,7 +172,7 @@ void DetectorConstruction::DefineMaterials()
   fShieldMater -> AddElement(N, 0.001);
   fShieldMater -> AddElement(Fe, 0.6977);
 
-  fTargetMater = mXenon;
+  fTargetMater = mXenon136;
 
   //EndCap-North -------- Start -------- EndCap-North//
 
