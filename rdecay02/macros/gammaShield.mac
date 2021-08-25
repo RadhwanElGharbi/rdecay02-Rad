@@ -1,6 +1,8 @@
 /control/verbose 2
 /run/verbose 1
 
+/rdecay02/det/setGapThickness 1 m
+
 /run/initialize
 ##/control/execute vis.mac
 ##/vis/viewer/colourByDensity 1 mg/cm3 1 8000 20000
@@ -26,7 +28,7 @@
 /gps/pos/radius 16 m
 /gps/pos/halfz 16 m
 /gps/pos/confine EndCapNorthShield
-/gps/pos/centre 0 0 0
+/gps/pos/centre 0 0 12
 /gps/ang/type iso
 /gps/ene/mono 2.448 MeV
 
@@ -37,7 +39,7 @@
 /gps/pos/radius 15 m
 /gps/pos/halfz 15 m
 /gps/pos/confine EndCapSouthShield
-/gps/pos/centre 0 0 0
+/gps/pos/centre 0 0 -12
 /gps/ang/type iso
 /gps/ene/mono 2.448 MeV
 

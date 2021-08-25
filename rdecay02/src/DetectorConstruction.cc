@@ -123,12 +123,12 @@ void DetectorConstruction::DefineMaterials()
   // target density
   targetPressure=15;
   densityXe = ((targetPressure*molarMassXe)/(0.0821*275))/1E3;
-  densityXe136 = ((targetPressure*molarMassXe136)/(0.0821*275))/1E3;
+  densityXe136 = 80.3; //kg/m3
 
   // build materials
   //
   mXenon = new G4Material("Xenon", 54, molarMassXe*g/mole, densityXe*g/cm3, kStateGas, 275.*kelvin, targetPressure=15*atmosphere);
-  mXenon136 = new G4Material("Xenon136", 54, molarMassXe136*g/mole, densityXe136*g/cm3, kStateGas, 275.*kelvin, targetPressure=15*atmosphere);
+  mXenon136 = new G4Material("Xenon136", 54, molarMassXe136*g/mole, densityXe136*kg/m3, kStateGas, 275.*kelvin, targetPressure=15*atmosphere);
 
   fDetectorMater =
   new G4Material("Copper", 29, 63.546*g/mole, 8.96*g/cm3);
@@ -432,7 +432,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
 
 void DetectorConstruction::PrintParameters()
 {
-  G4double xenonMass = (fTargetRadius/m) * (fTargetRadius/m) * pi * (fTargetLength/m) * densityXe136 * 1000 * kg;
+  G4double xenonMass = (fTargetRadius/m) * (fTargetRadius/m) * pi * (fTargetLength/m) * densityXe136 * kg;
 
   G4double copperVolume = (((fTargetRadius/m) + (fDetectorThickness/m)) * ((fTargetRadius/m) + (fDetectorThickness/m)) * pi * ((fTargetLength/m) + (fDetectorThickness/m) * 2))-((fTargetRadius/m) * (fTargetRadius/m) * pi * (fTargetLength/m));
   G4double copperMass = copperVolume * 8960. * kg;
