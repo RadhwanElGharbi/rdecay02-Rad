@@ -26,7 +26,7 @@
 /gps/pos/radius 16 m
 /gps/pos/halfz 16 m
 /gps/pos/confine EndCapNorthGap
-/gps/pos/centre 0 0 12
+/gps/pos/centre 0 0 0
 /gps/ang/type iso
 /gps/ene/mono 2.448 MeV
 
@@ -37,7 +37,7 @@
 /gps/pos/radius 15 m
 /gps/pos/halfz 15 m
 /gps/pos/confine EndCapSouthGap
-/gps/pos/centre 0 0 -12
+/gps/pos/centre 0 0 0
 /gps/ang/type iso
 /gps/ene/mono 2.448 MeV
 
@@ -55,7 +55,7 @@
 
 /run/printProgress 10000
 
-/run/beamOn 10000
+/run/beamOn 5000000
 
 
 

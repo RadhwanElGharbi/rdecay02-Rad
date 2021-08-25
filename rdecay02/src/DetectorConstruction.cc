@@ -161,7 +161,7 @@ void DetectorConstruction::DefineMaterials()
   G4Element* Ni = new G4Element("Nickel", "Ni", 28, 58.693*g/mole);
   G4Element* Fe = new G4Element("Iron", "Fe", 26, 55.845*g/mole);
   //Stainless Steel 304. MIGHT BE ADJUSTED.
-  fShieldMater = new G4Material("Stainless Steel", 8*kg/m3, 9, kStateGas, 275.*kelvin, 55.584*atmosphere);
+  fShieldMater = new G4Material("Stainless Steel", 8000*kg/m3, 9, kStateGas, 275.*kelvin, 55.584*atmosphere);
   fShieldMater -> AddElement(C, 0.0007);
   fShieldMater -> AddElement(Cr, 0.18);
   fShieldMater -> AddElement(Mn, 0.02);
@@ -248,7 +248,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   //
   G4Tubs* 
   sDetector = new G4Tubs("Detector",  
-                fTargetRadius, (fTargetRadius+fDetectorThickness), 0.5*fDetectorLength, 0.,twopi);
+                fTargetRadius, (fTargetRadius+fDetectorThickness), (0.5*fDetectorLength) + fDetectorThickness, 0.,twopi);
 
 
   fLogicDetector = new G4LogicalVolume(sDetector,       //shape
@@ -267,7 +267,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   //
   G4Tubs*
   sGap = new G4Tubs("Gap",
-                (fDetectorThickness+fTargetRadius), (fDetectorThickness+fTargetRadius+fGapThickness), 0.5*fGapLength, 0.,twopi);
+                (fDetectorThickness+fTargetRadius), (fDetectorThickness+fTargetRadius+fGapThickness), (0.5*fGapLength) + fDetectorThickness + fGapThickness, 0.,twopi);
 
 
   fLogicGap = new G4LogicalVolume(sGap,       //shape
@@ -285,7 +285,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   // Shield
   //
   G4Tubs*
-  sShield = new G4Tubs("Shield", (fDetectorThickness+fTargetRadius+fGapThickness), fWorldRadius, 0.5*fShieldLength, 0.,twopi);
+  sShield = new G4Tubs("Shield", (fDetectorThickness+fTargetRadius+fGapThickness), (fDetectorThickness+fTargetRadius+fGapThickness+fShieldThickness), (0.5*fShieldLength) + fDetectorThickness + fGapThickness + fShieldThickness, 0.,twopi);
 
 
   fLogicShield = new G4LogicalVolume(sShield,       //shape
@@ -303,7 +303,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   // EndCap-North-Detector ----------- Start ----------- EndCap-North-Detector //
 
   G4Tubs*
-  sEndCapNorthDetector = new G4Tubs("EndCapNorthDetector", 0., fWorldRadius, 0.5*fEndCapNorthDetectorLength, 0.,twopi);
+  sEndCapNorthDetector = new G4Tubs("EndCapNorthDetector", 0., fTargetRadius, 0.5*fEndCapNorthDetectorLength, 0.,twopi);
 
 
   fLogicEndCapNorthDetector = new G4LogicalVolume(sEndCapNorthDetector,       //shape
@@ -323,7 +323,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   // EndCap-North-Gap ----------- Start ----------- EndCap-North-Gap //
 
   G4Tubs*
-  sEndCapNorthGap = new G4Tubs("EndCapNorthGap", 0., fWorldRadius, 0.5*fEndCapNorthGapLength, 0.,twopi);
+  sEndCapNorthGap = new G4Tubs("EndCapNorthGap", 0., fTargetRadius+fDetectorThickness, 0.5*fEndCapNorthGapLength, 0.,twopi);
 
 
   fLogicEndCapNorthGap = new G4LogicalVolume(sEndCapNorthGap,       //shape
@@ -343,7 +343,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   // EndCap-North-Shield ----------- Start ----------- EndCap-North-Shield //
 
   G4Tubs*
-  sEndCapNorthShield = new G4Tubs("EndCapNorthShield", 0., fWorldRadius, 0.5*fEndCapNorthShieldLength, 0.,twopi);
+  sEndCapNorthShield = new G4Tubs("EndCapNorthShield", 0., fTargetRadius+fDetectorThickness+fGapThickness, 0.5*fEndCapNorthShieldLength, 0.,twopi);
 
 
   fLogicEndCapNorthShield = new G4LogicalVolume(sEndCapNorthShield,       //shape
@@ -363,7 +363,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   // EndCap-South-Detector ----------- Start ----------- EndCap-South-Detector //
 
   G4Tubs*
-  sEndCapSouthDetector = new G4Tubs("EndCapSouthDetector", 0., fWorldRadius, 0.5*fEndCapSouthDetectorLength, 0.,twopi);
+  sEndCapSouthDetector = new G4Tubs("EndCapSouthDetector", 0., fTargetRadius, 0.5*fEndCapSouthDetectorLength, 0.,twopi);
 
 
   fLogicEndCapSouthDetector = new G4LogicalVolume(sEndCapSouthDetector,       //shape
@@ -383,7 +383,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   // EndCap-South-Gap ----------- Start ----------- EndCap-South-Gap //
 
   G4Tubs*
-  sEndCapSouthGap = new G4Tubs("EndCapSouthGap", 0., fWorldRadius, 0.5*fEndCapSouthGapLength, 0.,twopi);
+  sEndCapSouthGap = new G4Tubs("EndCapSouthGap", 0., fTargetRadius + fDetectorThickness, 0.5*fEndCapSouthGapLength, 0.,twopi);
 
 
   fLogicEndCapSouthGap = new G4LogicalVolume(sEndCapSouthGap,       //shape
@@ -403,7 +403,7 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   // EndCap-South-Shield ----------- Start ----------- EndCap-South-Shield //
 
   G4Tubs*
-  sEndCapSouthShield = new G4Tubs("EndCapSouthShield", 0., fWorldRadius, 0.5*fEndCapSouthShieldLength, 0.,twopi);
+  sEndCapSouthShield = new G4Tubs("EndCapSouthShield", 0., fTargetRadius + fDetectorThickness + fGapThickness, 0.5*fEndCapSouthShieldLength, 0.,twopi);
 
 
   fLogicEndCapSouthShield = new G4LogicalVolume(sEndCapSouthShield,       //shape
@@ -432,6 +432,17 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
 
 void DetectorConstruction::PrintParameters()
 {
+  G4double xenonMass = (fTargetRadius/m) * (fTargetRadius/m) * pi * (fTargetLength/m) * densityXe136 * 1000 * kg;
+
+  G4double copperVolume = (((fTargetRadius/m) + (fDetectorThickness/m)) * ((fTargetRadius/m) + (fDetectorThickness/m)) * pi * ((fTargetLength/m) + (fDetectorThickness/m) * 2))-((fTargetRadius/m) * (fTargetRadius/m) * pi * (fTargetLength/m));
+  G4double copperMass = copperVolume * 8960. * kg;
+
+  G4double waterVolume = (((fTargetRadius/m) + (fDetectorThickness/m) + (fGapThickness/m)) * ((fTargetRadius/m) + (fDetectorThickness/m) + (fGapThickness/m)) * pi * ((fTargetLength/m) + 2*((fDetectorThickness/m) + (fGapThickness/m)))) - (((fTargetRadius/m) + (fDetectorThickness/m)) * ((fTargetRadius/m) + (fDetectorThickness/m)) * pi * ((fTargetLength/m) + (fDetectorThickness/m) * 2));
+  G4double waterMass = waterVolume * 15000. * kg;
+
+  G4double steelVolume = (((fTargetRadius/m) + (fDetectorThickness/m) + (fGapThickness/m) + (fShieldThickness/m)) * ((fTargetRadius/m) + (fDetectorThickness/m) + (fGapThickness/m) + (fShieldThickness/m)) * pi * ((fTargetLength/m) + 2*((fDetectorThickness/m) + (fGapThickness/m) + (fShieldThickness/m)))) - (((fTargetRadius/m) + (fDetectorThickness/m) + (fGapThickness/m)) * ((fTargetRadius/m) + (fDetectorThickness/m) + (fGapThickness/m)) * pi * ((fTargetLength/m) + 2*((fDetectorThickness/m) + (fGapThickness/m))));
+  G4double steelMass = steelVolume * 8000. * kg;
+  
   G4cout << "\n Target : Length = " << G4BestUnit(fTargetLength,"Length")
          << " Radius = " << G4BestUnit(fTargetRadius,"Length")
          << " Material = " << fTargetMater->GetName();
@@ -439,7 +450,7 @@ void DetectorConstruction::PrintParameters()
          << " Thickness = " << G4BestUnit(fDetectorThickness,"Length")
          << " Material = " << fDetectorMater->GetName();
   G4cout << "\n Gap : Length = " << G4BestUnit(fGapLength,"Length")
-         << " Tickness = " << G4BestUnit(fGapThickness,"Length")
+         << " Thickness = " << G4BestUnit(fGapThickness,"Length")
          << " Material = " << fGapMater->GetName();
   G4cout << "\n Shield : Length = " << G4BestUnit(fShieldLength,"Length")
          << " Thickness = " << G4BestUnit(fShieldThickness,"Length")
@@ -455,7 +466,11 @@ void DetectorConstruction::PrintParameters()
          << "\n Shield Thickness = " << G4BestUnit(fEndCapSouthShieldLength,"Length")
          << G4endl;
   G4cout << "\n World : Length = " << G4BestUnit(fWorldLength,"Length")
-         << " Radius = " << G4BestUnit(fWorldRadius,"Length") << G4endl;         
+         << " Radius = " << G4BestUnit(fWorldRadius,"Length") << G4endl;
+  G4cout << "\n Target mass = " << G4BestUnit(xenonMass,"Mass")
+         << "\n Detector mass = " << G4BestUnit(copperMass,"Mass")
+         << "\n Gap mass = " << G4BestUnit(waterMass,"Mass")
+         << "\n Shield mass = " << G4BestUnit(steelMass,"Mass") << G4endl;
 
   G4cout << "\n" << fTargetMater << "\n" << fDetectorMater << "\n" << fGapMater << "\n" << fShieldMater << G4endl;
 }
@@ -553,6 +568,8 @@ void DetectorConstruction::SetTargetLength(G4double value)
 void DetectorConstruction::SetDetectorThickness(G4double value)
 {
   fDetectorThickness = value;
+  fEndCapNorthDetectorLength = value;
+  fEndCapSouthDetectorLength = value;
   G4RunManager::GetRunManager()->ReinitializeGeometry();
 }
 
@@ -569,6 +586,8 @@ void DetectorConstruction::SetDetectorLength(G4double value)
 void DetectorConstruction::SetGapThickness(G4double value)
 {
   fGapThickness = value;
+  fEndCapNorthGapLength = value;
+  fEndCapSouthGapLength = value;
   G4RunManager::GetRunManager()->ReinitializeGeometry();
 }
 
@@ -585,6 +604,8 @@ void DetectorConstruction::SetGapLength(G4double value)
 void DetectorConstruction::SetShieldThickness(G4double value)
 {
   fShieldThickness = value;
+  fEndCapNorthShieldLength = value;
+  fEndCapSouthShieldLength = value;
   G4RunManager::GetRunManager()->ReinitializeGeometry();
 }
 
