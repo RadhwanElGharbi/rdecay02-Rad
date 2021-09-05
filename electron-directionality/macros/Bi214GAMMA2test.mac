@@ -1,0 +1,64 @@
+/control/verbose 2
+/run/verbose 1
+
+##/run/initialize
+/control/execute vis.mac
+/vis/viewer/colourByDensity 1 mg/cm3 1 8000 20000
+/vis/viewer/set/style w
+/vis/viewer/set/auxiliaryEdge
+/process/had/rdm/noVolumes
+/process/had/rdm/allVolumes
+
+/gps/particle gamma
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/centre 0 0 0
+/gps/pos/radius 14 m
+/gps/pos/halfz 14 m
+/gps/ang/type iso
+/gps/pos/confine Detector
+/gps/ene/mono 2.448 MeV
+
+/gps/source/add 1
+/gps/particle gamma
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/radius 15 m
+/gps/pos/halfz 15 m
+/gps/pos/confine EndCapNorthDetector
+/gps/pos/centre 0 0 12
+/gps/ang/type iso
+/gps/ene/mono 2.448 MeV
+
+/gps/source/add 1
+/gps/particle gamma
+/gps/pos/type Volume
+/gps/pos/shape Cylinder
+/gps/pos/radius 15 m
+/gps/pos/halfz 15 m
+/gps/pos/confine EndCapSouthDetector
+/gps/pos/centre 0 0 -12
+/gps/ang/type iso
+/gps/ene/mono 2.448 MeV
+
+/process/had/rdm/analogueMC 0
+
+/analysis/setFileName bi214GAMMA-Detector
+/analysis/h1/set 0 100 0. 5. MeV
+/analysis/h1/set 1 100 0. 5. MeV
+/analysis/h1/set 6 100 0. 5. MeV
+/analysis/ntuple/setActivation 0 true
+/analysis/ntuple/setActivation 1 true
+/analysis/ntuple/setActivation 2 true
+/analysis/ntuple/setActivation 3 true
+/analysis/ntuple/setActivation 4 true
+
+/run/printProgress 10000
+
+/run/beamOn 1000
+
+
+
+
+
+

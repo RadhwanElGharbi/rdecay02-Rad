@@ -1,0 +1,28 @@
+/rdecay02/det/setTargetRadius 2.5 cm
+/rdecay02/det/setTargetLength 5 cm
+
+/control/execute vis.mac
+
+/gps/particle e-
+
+/gps/pos/type Beam
+/gps/pos/centre 0 0 13 m
+##/gps/ang/rot1 0 0 -1
+##/gps/ang/rot2 0 0 -1
+/gps/ang/type beam1d
+
+
+##/gps/ene/type Gauss
+/gps/ene/mono 6 MeV
+##/gps/ene/sigma 0 MeV
+
+/analysis/setFileName bi214GAMMA-Detector
+/analysis/h1/set 0 100 0. 5. MeV
+/analysis/h1/set 1 100 0. 5. MeV
+/analysis/h1/set 6 100 0. 5. MeV
+/analysis/ntuple/setActivation 0 true
+/analysis/ntuple/setActivation 1 true
+/analysis/ntuple/setActivation 2 true
+/analysis/ntuple/setActivation 3 true
+
+/run/beamOn 100
